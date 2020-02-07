@@ -23,6 +23,8 @@ export class HomePage {
   onpickupClick(){
     this.router.navigate(['pickup-location']);
   }
+
+  
   
 }
 

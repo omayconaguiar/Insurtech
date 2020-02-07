@@ -1,7 +1,8 @@
 {
   "name": "formWithLeaflet",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

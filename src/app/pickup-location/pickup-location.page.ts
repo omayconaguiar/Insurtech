@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
-
+import { AlertController } from '@ionic/angular';
 import { Map, tileLayer, marker } from "leaflet";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
@@ -13,15 +13,40 @@ export class PickupLocationPage {
   map: Map;
   newMarker: any;
   address: string[];
+  
 
-  constructor(private geocoder: NativeGeocoder, private router: Router) {}
+  constructor(private geocoder: NativeGeocoder, private router: Router, public alertCtrl: AlertController) {}
 
+  async showConfirmAlert() {
+      const alert = await this.alertCtrl.create({
+        message: 'Você gostaria de acionar o seguro?',
+        buttons: [
+          {
+            text: 'Sim',
+            role: 'cancel',
+            handler: () => {
+              console.log('No clicked');
+            }
+          },
+          {
+            text: 'Depois',
+            handler: () => {
+              console.log('Yes clicked');
+            }
+          }
+        ]
+      });
+     await alert.present(); 
+  }
+  
+    
+    
   ionViewDidEnter() {
     this.loadMap();
   }
 
   loadMap() {
-    this.map = new Map("mapId").setView([17.385, 78.4867], 13);
+    this.map = new Map("mapId").setView([17.385, 78.4867], 16);
 
     tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
